@@ -16,10 +16,26 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
-
+    @RequestMapping("list")
+    public List<Person> list(){
+        return personService.list();
+    }
     @RequestMapping("item/{id}")
     public Optional<Person> show(@PathVariable Long id){
         return personService.show(id);
     }
+    @PostMapping("add")
+    public Person add(@RequestBody Person person){
+        return personService.add(person);
+    }
+    @PutMapping("update_item/{id}")
+    public Person update(@RequestBody Person person){
+       return personService.update(person);
+    }
+    @RequestMapping("delete_item/{id}")
+    public void delete(@PathVariable Long id){
+        personService.delete(id);
+    }
+
 
 }
